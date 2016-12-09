@@ -1,0 +1,10 @@
+what is the difference between web server and application server?
+
+what is a architecture of a web server and an application server?
+
+what is the purpose of framework and is EJB a framework?
+
+do we have different frameworks for each MVC layer?
+
+can we use ejb just for some purposes of an application? e.g: in transaction manager
+
