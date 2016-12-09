@@ -8,3 +8,5 @@ do we have different frameworks for each MVC layer?
 
 can we use ejb just for some purposes of an application? e.g: in transaction manager
 
+
+http://tutorials.jenkov.com/
