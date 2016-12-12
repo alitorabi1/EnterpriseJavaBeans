@@ -82,3 +82,17 @@
 /Shout/Shout-war/dist/
 /Shaut-GUI-Client/build/
 >>>>>>> f6e08bd13b3f2bc3062ffc92d322e39783f3a89d
+/ChatService/nbproject/private/
+/ChatClient/nbproject/private/
+/Chat/nbproject/private/
+/Chat/Chat-war/nbproject/private/
+/Chat/Chat-ejb/nbproject/private/
+/Chat/Chat-ejb/build/
+/ChatService/build/
+/ChatService/dist/
+/Chat/Chat-ejb/dist/
+/Chat/build/
+/Chat/Chat-war/build/
+/Chat/Chat-war/dist/
+/Chat/dist/
+/ChatClient/build/

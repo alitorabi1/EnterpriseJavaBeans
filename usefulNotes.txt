@@ -10,3 +10,5 @@ can we use ejb just for some purposes of an application? e.g: in transaction man
 
 
 http://tutorials.jenkov.com/
+
+https://www.youtube.com/watch?v=7PtIHBCuR-Q
