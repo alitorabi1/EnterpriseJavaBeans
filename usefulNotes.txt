@@ -12,3 +12,13 @@ can we use ejb just for some purposes of an application? e.g: in transaction man
 http://tutorials.jenkov.com/
 
 https://www.youtube.com/watch?v=7PtIHBCuR-Q
+
+
+Tax return softwares:
+http://www.studiotax.com/en/
+http://www.ufile.ca/
+
+
+
+http://www.payscale.com/research/CA/Job=Web_Developer/Salary/4e4b559e/Montr%C3%A9al-QC
+http://www.startupdrinksmontreal.com/
