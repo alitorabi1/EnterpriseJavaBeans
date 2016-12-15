@@ -1,21 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ui;
 
-/**
- *
- * @author ipd
- */
+import entity.Course;
+import entity.Student;
+import java.text.ParseException;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceException;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 public class FancyRegUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FancyRegUI
-     */
+    EntityManagerFactory emf;
+    EntityManager em;
+
     public FancyRegUI() {
-        initComponents();
+        try {
+            emf = javax.persistence.Persistence.createEntityManagerFactory("FancyRegJPAPU");
+            em = emf.createEntityManager();
+            initComponents();
+            updateStudentList();
+            updateCourseList();
+        } catch (PersistenceException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error connecting to database");
+            System.exit(1);
+        }
     }
 
     /**
@@ -33,8 +44,8 @@ public class FancyRegUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jlStudents = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btRegister = new javax.swing.JButton();
+        btUnregister = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jlRegistrations = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
@@ -60,17 +71,17 @@ public class FancyRegUI extends javax.swing.JFrame {
 
         jLabel2.setText("Registrations:");
 
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btRegister.setText("Register");
+        btRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btRegisterActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Unregister");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btUnregister.setText("Unregister");
+        btUnregister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btUnregisterActionPerformed(evt);
             }
         });
 
@@ -107,7 +118,6 @@ public class FancyRegUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)))
-                        .addGap(18, 18, 18)
                         .addComponent(btAddName)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -115,9 +125,9 @@ public class FancyRegUI extends javax.swing.JFrame {
                         .addGap(57, 57, 57)
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(btUnregister))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -151,8 +161,8 @@ public class FancyRegUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)))
+                            .addComponent(btRegister)
+                            .addComponent(btUnregister)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4))
@@ -171,21 +181,101 @@ public class FancyRegUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAddNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddNameActionPerformed
-        // TODO add your handling code here:
+        String name = tfName.getText();
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Name must not be empty");
+            return;
+        }
+        addStudent(name);
+        updateStudentList();
+        tfName.setText("");
     }//GEN-LAST:event_btAddNameActionPerformed
 
     private void btAddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddCourseActionPerformed
-        // TODO add your handling code here:
+        String subject = tfCourse.getText();
+        if (subject.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Subject must not be empty");
+            return;
+        }
+        addCourse(subject);
+        updateCourseList();
+        tfCourse.setText("");
     }//GEN-LAST:event_btAddCourseActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegisterActionPerformed
+//        try {
+//            String name = tfName.getText();
+//            String dateString = tfDate.getText();
+//            if (name.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Name must not be empty");
+//                return;
+//            }
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+//            Date dob = format.parse(dateString);
+//            addPerson(name, dob);
+//            updatePeopleList();
+//            tfName.setText("");
+//            tfDate.setText("");
+//        } catch (ParseException ex) {
+//            JOptionPane.showMessageDialog(this, "Date must be in YYYY/MM/DD format");
+//        }
+    }//GEN-LAST:event_btRegisterActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btUnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUnregisterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btUnregisterActionPerformed
 
+    void addStudent(String name) {
+        Student s = new Student();
+        s.setName(name);
+        //
+        em.getTransaction().begin();
+        try {
+            em.persist(s);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(this, "Error adding student record");
+        }
+    }
+
+    void updateStudentList() {
+        List<Student> list = em.createQuery("SELECT s FROM Student s").getResultList();
+        DefaultListModel model = new DefaultListModel();
+        for (Student s : list) {
+            model.addElement(s.getName());
+        }
+        jlStudents.setModel(model);
+        System.out.println("LIST: " + list);
+        // TODO: add to JTable
+    }
+
+    void addCourse(String subject) {
+        Course c = new Course();
+        c.setSubject(subject);
+        //
+        em.getTransaction().begin();
+        try {
+            em.persist(c);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(this, "Error adding course record");
+        }
+    }
+
+    void updateCourseList() {
+        List<Course> list = em.createQuery("SELECT c FROM Course c").getResultList();
+        DefaultListModel model = new DefaultListModel();
+        for (Course c : list) {
+            model.addElement(c.getSubject());
+        }
+        jlCources.setModel(model);
+        System.out.println("LIST: " + list);
+        // TODO: add to JTable
+    }
     /**
      * @param args the command line arguments
      */
@@ -224,8 +314,8 @@ public class FancyRegUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddCourse;
     private javax.swing.JButton btAddName;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btRegister;
+    private javax.swing.JButton btUnregister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
