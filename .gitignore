@@ -120,3 +120,14 @@
 /FancyRegUI/build/
 /FancyRegJPA/nbproject/private/
 /FancyRegJPA/build/
+/FancyRegInterface/build/
+/SAAQ-Interface/nbproject/private/
+/SAAQ-Client/nbproject/private/
+/SAAQ-Client/build/
+/SAAQ/nbproject/private/
+/SAAQ/SAAQ-ejb/nbproject/private/
+/SAAQ/SAAQ-ejb/build/
+/SAAQ/build/
+/SAAQ-Interface/dist/
+/SAAQ-Interface/build/
+/SAAQ/SAAQ-ejb/dist/
