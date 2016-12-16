@@ -5,6 +5,7 @@
  */
 package saaq.ejb;
 
+import java.util.List;
 import javax.ejb.Remote;
 import saaq.entity.Car;
 import saaq.entity.Owner;

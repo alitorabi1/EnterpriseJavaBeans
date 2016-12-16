@@ -131,3 +131,15 @@
 /SAAQ-Interface/dist/
 /SAAQ-Interface/build/
 /SAAQ/SAAQ-ejb/dist/
+/AutoInterface/nbproject/private/
+/AutoClient/nbproject/private/
+/Auto/nbproject/private/
+/Auto/Auto-ejb/nbproject/private/
+/AutoInterface/build/
+/Auto/Auto-ejb/build/
+/Auto/build/
+/AutoInterface/dist/
+/Auto/Auto-ejb/dist/
+/Auto/dist/
+/AutoClient/build/
+/AutoClient/dist/

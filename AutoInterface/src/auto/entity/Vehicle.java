@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package saaq.entity;
+package auto.entity;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,32 +14,11 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author ipd
+ * @author lenovo
  */
 @Entity
-public class Car implements Serializable {
+public class Vehicle implements Serializable {
 
-    private String makeModel;
-
-    public String getMakeModel() {
-        return makeModel;
-    }
-
-    public void setMakeModel(String makeModel) {
-        this.makeModel = makeModel;
-    }
-
-    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
-    }
-
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,15 +32,25 @@ public class Car implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne
-    private Owner owner;
-
-    public Owner getOwner() {
-        return owner;
+    private String makeModel;
+    
+    public String getMakeModel() {
+        return makeModel;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setMakeModel(String makeModel) {
+        this.makeModel = makeModel;
+    }
+    
+    @ManyToOne
+    private Lord lord;
+
+    public Lord getLord() {
+        return lord;
+    }
+
+    public void setLord(Lord lord) {
+        this.lord = lord;
     }
 
     @Override
@@ -76,10 +63,10 @@ public class Car implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Car)) {
+        if (!(object instanceof Vehicle)) {
             return false;
         }
-        Car other = (Car) object;
+        Vehicle other = (Vehicle) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -88,7 +75,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%d: %s owned by: %s", id, makeModel, owner.getName());
+        return "auto.entity.Vehicle[ id=" + id + " ]";
     }
-    
+
 }

@@ -41,12 +41,20 @@ public class SAAQService implements SAAQServiceRemote {
 
     @Override
     public List<Car> getCarListForOwner(Owner owner) {
-        return null;
+        Car car = new Car();
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+//        cq.select(cq.from(Vehicle.class));
+//        cq.where("=:l", l);
+        em.createQuery("SELECT FROM car WHERE owner.id=:oId");
+        em.setProperty("oId", owner.getId());
+        return em.createQuery(cq).getResultList();
     }
 
     @Override
-    public Object getCarList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Car> getCarList() {
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Car.class));
+        return em.createQuery(cq).getResultList();
     }
 
 }

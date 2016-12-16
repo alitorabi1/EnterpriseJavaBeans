@@ -16,8 +16,8 @@ public class SAAQClient extends javax.swing.JFrame {
     SAAQServiceRemote service;
     DefaultListModel<Car> carListModel;
     DefaultListModel<Owner> ownerListModel;
-//    ArrayList<Car> carlist;
-//    ArrayList<Owner> ownerlist;
+    ArrayList<Car> carlist;
+    ArrayList<Owner> ownerlist;
 //    String car;
 
     public SAAQClient() {
@@ -28,7 +28,11 @@ public class SAAQClient extends javax.swing.JFrame {
             InitialContext ctx = new InitialContext(props);
             service = (SAAQServiceRemote) ctx.lookup(SAAQServiceRemote.class.getName());
             //
+            carListModel = new DefaultListModel<Car>();
+            ownerListModel = new DefaultListModel<Owner>();
             initComponents();
+            updateCarList();
+            updateOwnerList();
 //            balance = service.addOwner(owner);
 //            jlCar.setText(String.valueOf(balance));
         } catch (NamingException ex) {
@@ -62,6 +66,12 @@ public class SAAQClient extends javax.swing.JFrame {
 
         jLabel1.setText("Owner:");
 
+        tfOwner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfOwnerActionPerformed(evt);
+            }
+        });
+
         btAddOwner.setText("Add");
         btAddOwner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +81,12 @@ public class SAAQClient extends javax.swing.JFrame {
 
         jLabel2.setText("Car:");
 
+        tfCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCarActionPerformed(evt);
+            }
+        });
+
         btAddCar.setText("Add");
         btAddCar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,8 +94,12 @@ public class SAAQClient extends javax.swing.JFrame {
             }
         });
 
+        jlOwner.setModel(ownerListModel);
+        jlOwner.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jlOwner);
 
+        jlCar.setModel(carListModel);
+        jlCar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jlCar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,30 +107,30 @@ public class SAAQClient extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfOwner)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAddOwner)))
-                .addGap(34, 34, 34)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btAddOwner))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tfCar)
                         .addGap(18, 18, 18)
                         .addComponent(btAddCar))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,10 +139,10 @@ public class SAAQClient extends javax.swing.JFrame {
                     .addComponent(tfCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAddCar))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,7 +154,8 @@ public class SAAQClient extends javax.swing.JFrame {
             Owner o = new Owner();
             o.setName(name);
             service.addOwner(o);
-
+            updateOwnerList();
+            tfOwner.setText("");
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             ex.printStackTrace();
@@ -144,21 +165,52 @@ public class SAAQClient extends javax.swing.JFrame {
     private void btAddCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddCarActionPerformed
         try {
             String makeModel = tfCar.getText();
-            Car c = new Car();
-            c.setMakeModel(makeModel);
-//            service.addC(c);
+            if(makeModel.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Car must not be empty");
+                return;
+            }
+            Owner selectedOwner = (Owner) jlOwner.getSelectedValue();
+            if(jlOwner.isSelectionEmpty()){
+                JOptionPane.showMessageDialog(this, "Please select an owner");
+                return;
+            }
+            
+            Car car = new Car();
+            car.setMakeModel(tfCar.getText());
+            car.setOwner(selectedOwner);
+            service.addCar(car);
 
+            updateCarList();
+            tfCar.setText("");
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btAddCarActionPerformed
 
+    private void tfOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfOwnerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfOwnerActionPerformed
+
+    private void tfCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCarActionPerformed
+
     List<Owner> ownerList = new ArrayList<>();
     void updateOwnerList() {
+        ownerList = service.getOwnerList();
         ownerListModel.clear();
         for (Owner o: ownerList) {
             ownerListModel.addElement(o);
+        }
+    }
+
+    List<Car> carList = new ArrayList<>();
+    void updateCarList() {
+        carList = service.getCarList();
+        carListModel.clear();
+        for (Car c : carList) {
+            carListModel.addElement(c);
         }
     }
 
@@ -206,8 +258,8 @@ public class SAAQClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> jlCar;
-    private javax.swing.JList<String> jlOwner;
+    private javax.swing.JList<Car> jlCar;
+    private javax.swing.JList<Owner> jlOwner;
     private javax.swing.JTextField tfCar;
     private javax.swing.JTextField tfOwner;
     // End of variables declaration//GEN-END:variables
