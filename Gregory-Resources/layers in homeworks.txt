@@ -1,0 +1,38 @@
+>> Structure 1
+If the client is standalone then you
+need a separate library project for the Interface,
+and Entities, and Exceptions used by the Interface.
+
+>> Structure 2
+If client is JSP/JSF/Servlet or Enterprise client
+then you put Bean, Bean Interface, Entities,
+additional Exceptions used by Bean interface
+into -ejb project.
+And then -war project has dependency on -ejb.
+
+>> Structure 3
+Everything is in a -war project.
+
+
+Layers in Homework example
+
+- JSP/JSF/Servlet, Enterprise or Standalone client
+
+- Bean
+- JPA / Entity manager
+- JDBC connector
+
+- SQL Database
+
+
+Another setup
+- JSP/JSF/Servlet, Enterprise or Standalone client
+- JPA / Entity manager
+- JDBC connector
+
+- SQL Database
+
+
+
+M V VM
+M V C

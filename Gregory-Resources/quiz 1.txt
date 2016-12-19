@@ -1,0 +1,50 @@
+Quiz 1 - EJB
+============
+
+Create Java project Quiz1Account-Client
+
+Create Java Library project Quiz1Account-Interface
+
+Create Java Enterprise project Quiz1Account with EJB component and disabled JSP component.
+
+You should have 4 projects total: Client, Interface, Umbrella, EJB.
+
+class Operation implements Serializable {
+	double despositAmount;
+	double withdrawalAmount;
+	Date date;
+}
+
+You may create a convenience constructor.
+Do NOT create getters or setters.
+
+public class AccountAccessException extends Exception {
+	public AccountAccessException(String msg) {
+		super(msg);
+	}
+}
+
+public interface AccountServiceRemote {
+	// throw exception if deposit is negative
+	void makeDeposit(double amount) throws AccountAccessException;	
+	// throw exception if deposit is negative or
+	// there is not enough money in the account to withdraw without going below 0
+	void makeWithdrawal(double amount) throws AccountAccessException;
+	double getBalance();
+	ArrayList<Operation> getOperationList();
+}
+
+
+Singleton, make sure you user READ/WRITE locks appropriately.
+
+GUI in Swing according to the whiteboard drawing.
+
+
+WHAT TO SUBMIT AND HOW:
+
+1. Close Netbeans.
+2. Create a directory Quiz1Submission somewhere.
+3. Copy all 3 directories for 4 projects into Quiz1Submission.
+4. ZIP-up Quiz1Submission directory.
+5. Upload the resulting ZIP file as your solution.
+

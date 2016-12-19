@@ -1,0 +1,80 @@
+
+* Prospecting and networking
+
+* Set a small web site, get basic cheap business cards
+
+* Be prepared for 'fat and famin' cycle initially
+
+* Ideally you will acquire 3 repeat customers over time
+
+* Make sure you charge for preparation to the project 10-20%
+
+* Do NOT work with customers that have no money
+to pay you but offer majority of the payment
+after the project "sells" or "succeds"
+
+* Everything is negotiable
+
+* In a contract you must include:
+- disclaimer of no responsibility for use of the software,
+damages cause directly or indirectly by the software
+- give customer time to test and come back with list
+of issues to correct but put a time limit on it, e.g. 30 days.
+- put a clear dealine of when payments for your time
+must be made, e.g. invoice every 20 hours or 2 weeks,
+whichever comes sooner, payment within 10 business days.
+- contract will include the amount of hours that it will
+take to develop the project up to certain stage.
+AND you must include a clause for "additional hours".
+
+* Generally, if you're working for a software company,
+you will transfer all your rights to code you created
+to them.
+
+* If you expect to use the code for another customer
+then you may get a license from your current customer
+to use it in your future consulitng / software-dev project.
+(Customer is licensing the software back to you)
+
+* If the customer is not software type of business
+(e.g. building a website for someone) then do NOT
+assign the IP (copyright) but instead license it to them.
+
+* Rule of thumb about price per hour.
+Take hourly rate of full time employee (e.g. $30/hour)
+and double that (e.g. 2*$30 is $60/hour)
+Ask that rate, if it's too much they will tell you.
+Initially for the first 1-3 contracts you may ask less.
+
+* Last payment issues - do not deliver final,
+corrected version until they deliver the last payment
+
+* Until you're making 30,000CAD in any 4 consecutive
+quarter you do NOT need to register (or collect) GST/QST.
+(check current rules on Revenu Quebec website)
+
+Recommend: do NOT register for GST/QST until you have to.
+
+* Start with BENEFITS for the customer, NOT the features.
+
+* Break project down into a few deliverables / milestons
+with a timeline and what features they will have.
+
+* First 1 hour of discussion (at their office is free).
+WARNING: Do NOT solve all their probles, do NOT give them
+solutions, instead ask questions, focus on what their
+issues and goals are with this project.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
